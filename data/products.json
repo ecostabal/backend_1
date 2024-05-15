@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "title": "Parlante JBL",
+    "description": "Parlante de Alta Caludad marca JBL",
+    "code": "001",
+    "price": 80,
+    "status": true,
+    "stock": 5,
+    "category": "Parlante",
+    "thumbnails": [
+      "ruta1.jpg",
+      "ruta2.jpg"
+    ]
+  },
+  {
+    "id": "2",
+    "title": "Audífonos Sony",
+    "description": "Audífono bluetooth marca Sony",
+    "code": "002",
+    "price": 50,
+    "status": true,
+    "stock": 50,
+    "category": "Audífonos",
+    "thumbnails": [
+      "ruta1.jpg",
+      "ruta2.jpg"
+    ]
+  }
+]
