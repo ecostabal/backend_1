@@ -7,7 +7,7 @@ curl -X GET http://localhost:8080/api/products
 # Este comando obtiene un producto específico usando su ID.
 # Reemplaza ":pid" con el ID real del producto.
 
-curl -X GET http://localhost:8080/api/products/1
+curl -X GET http://localhost:8080/api/products/<PRODUCT_ID>
 
 # 3. Agregar un nuevo producto (POST /api/products)
 # Este comando agrega un nuevo producto con los campos especificados.
@@ -42,11 +42,11 @@ curl -X POST http://localhost:8080/api/products \
 # Este comando actualiza los detalles de un producto existente.
 # Reemplaza ":pid" con el ID real del producto.
 
-curl -X PUT http://localhost:8080/api/products/1 \
+curl -X PUT http://localhost:8080/api/products/<PRODUCT_ID> \
 -H "Content-Type: application/json" \
 -d '{
     "title": "Parlante JBL",
-    "description": "Parlante de Alta Caludad marca JBL",
+    "description": "Parlante de Alta Calidad marca JBL",
     "code": "001",
     "price": 80,
     "status": true,
@@ -59,7 +59,7 @@ curl -X PUT http://localhost:8080/api/products/1 \
 # Este comando elimina un producto específico usando su ID.
 # Reemplaza ":pid" con el ID real del producto.
 
-curl -X DELETE http://localhost:8080/api/products/1
+curl -X DELETE http://localhost:8080/api/products/<PRODUCT_ID>
 
 # Probar los endpoints de carritos
 
@@ -73,11 +73,11 @@ curl -X POST http://localhost:8080/api/carts \
 # Este comando lista todos los productos en un carrito específico.
 # Reemplaza ":cid" con el ID real del carrito.
 
-curl -X GET http://localhost:8080/api/carts/1
+curl -X GET http://localhost:8080/api/carts/<CART_ID>
 
 # 8. Agregar un producto a un carrito específico (POST /api/carts/:cid/product/:pid)
 # Este comando agrega un producto a un carrito específico.
 # Reemplaza ":cid" con el ID del carrito y ":pid" con el ID del producto.
 
-curl -X POST http://localhost:8080/api/carts/1/product/1 \
+curl -X POST http://localhost:8080/api/carts/<CART_ID>/product/<PRODUCT_ID> \
 -H "Content-Type: application/json"

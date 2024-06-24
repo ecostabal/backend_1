@@ -1,0 +1,27 @@
+<h1>Carrito</h1>
+<ul id="cart-product-list">
+    {{#each products}}
+    <li>
+        {{this.product.title}} - {{this.quantity}}
+        <button onclick="removeFromCart('{{@root._id}}', '{{this.product._id}}')">Eliminar</button>
+    </li>
+    {{/each}}
+</ul>
+
+<script>
+    function removeFromCart(cartId, productId) {
+        fetch(`/api/carts/${cartId}/products/${productId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                alert('Producto eliminado del carrito');
+                location.reload();
+            } else {
+                alert('Error al eliminar producto del carrito');
+            }
+        });
+    }
+</script>

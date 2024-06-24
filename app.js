@@ -3,6 +3,9 @@ const { create } = require('express-handlebars');
 const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
+const mongoose = require('mongoose');
+const connectDB = require('./db');
+const Product = require('./models/Product');
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
@@ -16,11 +19,11 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
-const productsRouter = require('./routes/products')(io);
-const cartsRouter = require('./routes/carts');
+// Conectar a MongoDB
+connectDB();
 
-// Importar la función readProducts desde products.js
-const { readProducts } = require('./routes/products_utils');
+const productsRouter = require('./routes/products');
+const cartsRouter = require('./routes/carts');
 
 app.use(express.json());
 app.use(express.static('public'));
@@ -28,9 +31,13 @@ app.use(express.static('public'));
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 
-app.get('/', (req, res) => {
-    const products = readProducts();
-    res.render('home', { products });
+app.get('/', async (req, res) => {
+    try {
+        const products = await Product.find().lean(); // Utiliza lean() para mejorar el rendimiento en la vista
+        res.render('home', { products });
+    } catch (error) {
+        res.status(500).json({ status: 'error', error: error.message });
+    }
 });
 
 app.get('/realtimeproducts', (req, res) => {
